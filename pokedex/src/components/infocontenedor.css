@@ -21,7 +21,6 @@ div > header > nav {
   color: white;
 }
 
-
 .tipos {
   display: flex;
   gap: 40px;
@@ -197,6 +196,8 @@ header {
 
 .moves {
   margin-top: -16.5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .flechita {

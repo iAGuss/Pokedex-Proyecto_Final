@@ -37,7 +37,7 @@ function Infocontenedor() {
 
   return (
     pokemon.name && (
-      <div style={{ backgroundColor: pokemon.typecolor1 }} className="div">
+      <div style={{ backgroundColor: pokemon.color }} className="div">
         <header style={{ backgroundColor: pokemon.color }}>
           <img className="pokebola" src={pokeball} />
           <nav>
@@ -76,11 +76,26 @@ function Infocontenedor() {
           <div className="tipos">
             {pokemon.type2 !== "" ? (
               <>
-                <span className={pokemon.type}>{pokemon.type}</span>
-                <span className={pokemon.type2}>{pokemon.type2}</span>
+                <span
+                  style={{ backgroundColor: pokemon.typecolor1 }}
+                  className={pokemon.type}
+                >
+                  {pokemon.type}
+                </span>
+                <span
+                  style={{ backgroundColor: pokemon.typecolor2 }}
+                  className={pokemon.type2}
+                >
+                  {pokemon.type2}
+                </span>
               </>
             ) : (
-              <span className={pokemon.type}>{pokemon.type}</span>
+              <span
+                style={{ backgroundColor: pokemon.typecolor1 }}
+                className={pokemon.type}
+              >
+                {pokemon.type}
+              </span>
             )}
           </div>
 

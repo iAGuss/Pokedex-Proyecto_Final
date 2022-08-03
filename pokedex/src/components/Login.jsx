@@ -3,29 +3,35 @@ import "./login.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 function Login() {
-  const [mail, setEmail] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  // const [mail, setEmail] = useState("");
 
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    return setEmail(e.target.value);
-  };
+  // const handleInputChange = (e) => {
+  //   return setEmail(e.target.value);
+  // };
 
-  const lapassword = (e) => {
-    setPassword(e.target.value);
-  };
+  // const lapassword = (e) => {
+  //   setPassword(e.target.value);
+  // };
 
   //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  const elclick = async (ev) => {
-    ev.preventDefault();
+  const elclick = async (data) => {
     try {
       const respuesta = await fetch("http://localhost:3010/login", {
         method: "POST",
-        body: JSON.stringify({ mail, password }),
+        body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
         },
@@ -51,17 +57,19 @@ function Login() {
       <div className="containerl">
         <div className="screen">
           <div className="screen__content">
-            <form className="login">
+            <form onSubmit={handleSubmit(elclick)} className="login">
               <div className="login__field">
                 <i className="login__icon fas fa-user"></i>
 
                 <input
-                  type="text"
+                  type="mail"
                   name="email"
                   className="login__input"
                   placeholder="User name / Email"
-                  onChange={handleInputChange}
+                  {...register("mail", { required: true })}
+                  // onChange={handleInputChange}
                 />
+                {errors.mail && <span>Error este campo es requerido</span>}
               </div>
               <div className="login__field">
                 <i className="login__icon fas fa-lock"></i>
@@ -70,11 +78,13 @@ function Login() {
                   type="password"
                   className="login__input"
                   placeholder="Password"
-                  onChange={lapassword}
+                  // onChange={lapassword}
+                  {...register("password", { required: true })}
                 />
+                {errors.password && <span>Error este campo es requerido</span>}
               </div>
 
-              <button className="button login__submit" onClick={elclick}>
+              <button className="button login__submit">
                 <span className="button__text">Login</span>
               </button>
             </form>

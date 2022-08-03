@@ -8,8 +8,9 @@ import { Link } from "react-router-dom";
 import agregar from "../assets/pickachumeme.jpg";
 
 function Pokemones() {
-  const [pokemon, setpokemon] = useState([]);
-  const [pokemons, setpokemons] = useState([]);
+  const [pokemonBackend, setpokemonBackend] = useState([]);
+  const [pokemonsFiltrados, setpokemonsFiltrados] = useState([]);
+  const [ordenarPorNumero, setOrdenarPorNumero] = useState(false);
 
   useEffect(() => {
     cargarPokemon();
@@ -24,35 +25,37 @@ function Pokemones() {
         throw new Error("Error en el servidor");
       }
       const pokemonFetch = await respuesta.json();
-      setpokemon(pokemonFetch);
-      setpokemons(pokemonFetch);
+      setpokemonBackend(pokemonFetch);
+      setpokemonsFiltrados(pokemonFetch);
     } catch (error) {
       console.log("No se pudo conectar con el back end");
     }
   };
 
   const filtrado = (evento) => {
-    const nuevoFiltrado = [...pokemons].filter((element) =>
+    const nuevoFiltrado = [...pokemonBackend].filter((element) =>
       element.name.toLowerCase().includes(evento.target.value.toLowerCase())
     );
-    setpokemons(nuevoFiltrado);
+    setpokemonsFiltrados(nuevoFiltrado);
+    setOrdenarPorNumero(false);
   };
 
   const alfabeticamente = () => {
-    const listaNueva = [...pokemon].sort((a, z) =>
+    const listaNueva = [...pokemonBackend].sort((a, z) =>
       a.name.localeCompare(z.name)
     );
-    setpokemons(listaNueva);
+    setpokemonsFiltrados(listaNueva);
+    setOrdenarPorNumero(true);
   };
   const numericamente = () => {
-    const listanumerica = [...pokemon].sort((a, z) =>
+    const listanumerica = [...pokemonBackend].sort((a, z) =>
       a.number.localeCompare(z.number)
     );
-    setpokemons(listanumerica);
+    setpokemonsFiltrados(listanumerica);
+    setOrdenarPorNumero(false);
   };
-  const funcionDeOrdenado = () => {
-    pokemon[0].number === "001" ? alfabeticamente() : numericamente();
-  };
+  const funcionDeOrdenado = !ordenarPorNumero ? alfabeticamente : numericamente;
+
   //-------------------reinicio token------------------------------------------
   const setLocalStorage = () => {
     localStorage.removeItem("token");
@@ -91,9 +94,7 @@ function Pokemones() {
 
           <div className="title2">
             <span className="az">
-              {" "}
-              <span>A</span>
-              <span>Z</span>
+              <span>{ordenarPorNumero ? "A-Z" : "#"}</span>
             </span>
             <img
               onClick={funcionDeOrdenado}
@@ -130,9 +131,9 @@ function Pokemones() {
             </button>
           </Link>
         )}
-        {pokemons ? (
+        {pokemonsFiltrados ? (
           <div className="container">
-            {pokemons.map((pokemon) => (
+            {pokemonsFiltrados.map((pokemon) => (
               <Pokemon key={pokemon.name} pokemon={pokemon} />
             ))}
           </div>
