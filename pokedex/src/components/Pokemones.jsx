@@ -6,6 +6,7 @@ import arrow from "../assets/Arrow.svg";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import agregar from "../assets/pickachumeme.jpg";
+import { SpinnerDotted } from "spinners-react";
 
 function Pokemones() {
   const [pokemonBackend, setpokemonBackend] = useState([]);
@@ -62,26 +63,44 @@ function Pokemones() {
     window.location.reload();
   };
   //-----------------------------------------------------------------------------
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   return (
     <>
-      <header className="headerr">
-        <div className="header">
-          <div className="title">
-            <img src={pokeball} alt="logo-pokeball" className="pokeball" />
-            <h1>Pokédex</h1>
-            {localStorage.token ? (
-              <button onClick={setLocalStorage}>Salir</button>
-            ) : (
-              <>
-                <Link to="/registrar">
-                  <button className="register-boton">Register</button>
-                </Link>
-                <Link to="/login">
-                  <button className="login-boton">Login</button>
-                </Link>
-              </>
-            )}
-            {/* <Link to="/login">
+      {loading ? (
+        <SpinnerDotted
+          className="elspiner"
+          color={"#FF4500"}
+          top={400}
+          loading={loading}
+          size={150}
+          marginTop={40}
+        />
+      ) : (
+        <>
+          <header className="headerr">
+            <div className="header">
+              <div className="title">
+                <img src={pokeball} alt="logo-pokeball" className="pokeball" />
+                <h1>Pokédex</h1>
+                {localStorage.token ? (
+                  <button onClick={setLocalStorage}>Salir</button>
+                ) : (
+                  <>
+                    <Link to="/registrar">
+                      <button className="register-boton">Register</button>
+                    </Link>
+                    <Link to="/login">
+                      <button className="login-boton">Login</button>
+                    </Link>
+                  </>
+                )}
+                {/* <Link to="/login">
               <button className="login-boton">Login</button>
             </Link>
             <Link to="/registrar">
@@ -90,55 +109,62 @@ function Pokemones() {
             <Link to="/">
               <button className="register-boton">Salir</button>
             </Link> */}
-          </div>
+              </div>
 
-          <div className="title2">
-            <span className="az">
-              <span>{ordenarPorNumero ? "A-Z" : "#"}</span>
-            </span>
-            <img
-              onClick={funcionDeOrdenado}
-              src={arrow}
-              alt="flecha"
-              className="flecha"
-            />
-          </div>
-        </div>
-        <div className="delInput">
-          <input
-            onChange={filtrado}
-            type="text"
-            name=""
-            id="jeje"
-            placeholder="Buscar"
-          />
-        </div>
-      </header>
-      <main>
-        {localStorage.token ? (
-          <div className="contenedor_nuevo">
-            <Link to="/agregar">
-              <img className="pokemon-agregar" src={agregar} alt="" srcset="" />
-            </Link>
-            <Link to="/agregar">
-              <button className="agregar-pokemon">Agregar pokemon</button>
-            </Link>
-          </div>
-        ) : (
-          <Link to="/login">
-            <button className="crea-tu-pokemon">
-              Para crear tu pokemon debes logearte
-            </button>
-          </Link>
-        )}
-        {pokemonsFiltrados ? (
-          <div className="container">
-            {pokemonsFiltrados.map((pokemon) => (
-              <Pokemon key={pokemon.name} pokemon={pokemon} />
-            ))}
-          </div>
-        ) : null}
-      </main>
+              <div className="title2">
+                <span className="az">
+                  <span>{ordenarPorNumero ? "A-Z" : "#"}</span>
+                </span>
+                <img
+                  onClick={funcionDeOrdenado}
+                  src={arrow}
+                  alt="flecha"
+                  className="flecha"
+                />
+              </div>
+            </div>
+            <div className="delInput">
+              <input
+                onChange={filtrado}
+                type="text"
+                name=""
+                id="jeje"
+                placeholder="Buscar"
+              />
+            </div>
+          </header>
+          <main>
+            {localStorage.token ? (
+              <div className="contenedor_nuevo">
+                <Link to="/agregar">
+                  <img
+                    className="pokemon-agregar"
+                    src={agregar}
+                    alt=""
+                    srcset=""
+                  />
+                </Link>
+                <Link to="/agregar">
+                  <button className="agregar-pokemon">Agregar pokemon</button>
+                </Link>
+              </div>
+            ) : (
+              <Link to="/login">
+                <button className="crea-tu-pokemon">
+                  Para crear tu pokemon debes logearte
+                </button>
+              </Link>
+            )}
+            {pokemonsFiltrados ? (
+              <div className="container">
+                {pokemonsFiltrados.map((pokemon) => (
+                  <Pokemon key={pokemon.name} pokemon={pokemon} />
+                ))}
+              </div>
+            ) : null}
+          </main>
+        </>
+      )}
     </>
   );
 }

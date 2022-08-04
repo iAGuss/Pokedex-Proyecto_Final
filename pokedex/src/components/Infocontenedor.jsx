@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import pokeball from "../assets/Pokeball.png";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { SpinnerDotted } from "spinners-react";
 
 function Infocontenedor() {
   const [pokemon, setpokemon] = useState({});
@@ -34,196 +35,215 @@ function Infocontenedor() {
       console.log("No se pudo conectar con el back end");
     }
   };
-
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   return (
     pokemon.name && (
       <div style={{ backgroundColor: pokemon.color }} className="div">
-        <header style={{ backgroundColor: pokemon.color }}>
-          <img className="pokebola" src={pokeball} />
-          <nav>
-            <div className="nav">
-              <Link to="/">
-                <img className="flechita" src={arrowleft} />
-              </Link>
-              <h1>{pokemon.name}</h1>
-            </div>
-
-            <p className="number2">{pokemon.number}</p>
-          </nav>
-          <div className="img">
-            <img className="imageni" src={pokemon.imagen} alt="" />
-            {false ? (
-              <p>
-                <Link to={`/contenedor/${1}`}>
-                  <ArrowBackIosIcon className="anterior" />
-                </Link>
-              </p>
-            ) : null}
-            {false ? (
-              <>
-                <p></p>
-                <p>
-                  <Link to={`/contenedor/${1}`}>
-                    <ArrowForwardIosIcon className="siguiente" />
+        {loading ? (
+          <SpinnerDotted
+            className="elspiner"
+            color={pokemon.color}
+            top={400}
+            loading={loading}
+            size={150}
+            marginTop={40}
+          />
+        ) : (
+          <>
+            <header style={{ backgroundColor: pokemon.color }}>
+              <img className="pokebola" src={pokeball} />
+              <nav>
+                <div className="nav">
+                  <Link to="/">
+                    <img className="flechita" src={arrowleft} />
                   </Link>
-                </p>
-              </>
-            ) : null}
-          </div>
-        </header>
+                  <h1>{pokemon.name}</h1>
+                </div>
 
-        <main className="main">
-          <div className="tipos">
-            {pokemon.type2 !== "" ? (
-              <>
-                <span
-                  style={{ backgroundColor: pokemon.typecolor1 }}
-                  className={pokemon.type}
-                >
-                  {pokemon.type}
-                </span>
-                <span
-                  style={{ backgroundColor: pokemon.typecolor2 }}
-                  className={pokemon.type2}
-                >
-                  {pokemon.type2}
-                </span>
-              </>
-            ) : (
-              <span
-                style={{ backgroundColor: pokemon.typecolor1 }}
-                className={pokemon.type}
-              >
-                {pokemon.type}
-              </span>
-            )}
-          </div>
+                <p className="number2">{pokemon.number}</p>
+              </nav>
+              <div className="img">
+                <img className="imageni" src={pokemon.imagen} alt="" />
+                {false ? (
+                  <p>
+                    <Link to={`/contenedor/${1}`}>
+                      <ArrowBackIosIcon className="anterior" />
+                    </Link>
+                  </p>
+                ) : null}
+                {false ? (
+                  <>
+                    <p></p>
+                    <p>
+                      <Link to={`/contenedor/${1}`}>
+                        <ArrowForwardIosIcon className="siguiente" />
+                      </Link>
+                    </p>
+                  </>
+                ) : null}
+              </div>
+            </header>
 
-          <h3 className="about" style={{ color: pokemon.color }}>
-            About
-          </h3>
-          <div className="informacion">
-            <div>
-              <BalanceIcon /> {pokemon.weight} <br />
-              Weight
-            </div>
-            <div className="peso">
-              <StraightenIcon /> {pokemon.height} <br />
-              Height
-            </div>
-            <div className="moves">
-              {pokemon.move2 !== "" ? (
-                <>
-                  <span className={pokemon.move}>{pokemon.move}</span>
-                  <span className={pokemon.move2}>{pokemon.move2}</span>
-                </>
-              ) : (
-                <span className={pokemon.move}>{pokemon.move}</span>
-              )}
-            </div>
-          </div>
-          <br />
-          <div className="descripcion">{pokemon.description}</div>
-          <div>
-            <h3 className="baseStats" style={{ color: pokemon.color }}>
-              Base Stats
-            </h3>
-            <div className="contiene">
-              <ul className="lista" style={{ color: pokemon.color }}>
-                <li className="lalista">
-                  <label className="nombres">{"HP"}</label>
-                  <label className="numeros">{pokemon.hp}</label>
-                  <div className="gus">
-                    <div
-                      className="agustina"
-                      style={{
-                        backgroundColor: pokemon.color,
-                        width: `${pokemon.hp / 2}%`,
-                      }}
-                    ></div>
+            <main className="main">
+              <div className="tipos">
+                {pokemon.type2 !== "" ? (
+                  <>
+                    <span
+                      style={{ backgroundColor: pokemon.typecolor1 }}
+                      className={pokemon.type}
+                    >
+                      {pokemon.type}
+                    </span>
+                    <span
+                      style={{ backgroundColor: pokemon.typecolor2 }}
+                      className={pokemon.type2}
+                    >
+                      {pokemon.type2}
+                    </span>
+                  </>
+                ) : (
+                  <span
+                    style={{ backgroundColor: pokemon.typecolor1 }}
+                    className={pokemon.type}
+                  >
+                    {pokemon.type}
+                  </span>
+                )}
+              </div>
 
-                    <div style={{ flex: "1" }}></div>
-                  </div>
-                </li>
-                <li className="lalista">
-                  <label className="nombres">{"ATK"}</label>
-                  <label className="numeros">{pokemon.atk}</label>
-                  <div className="gus">
-                    <div
-                      className="agustina"
-                      style={{
-                        backgroundColor: pokemon.color,
-                        width: `${pokemon.atk / 2}%`,
-                      }}
-                    ></div>
+              <h3 className="about" style={{ color: pokemon.color }}>
+                About
+              </h3>
+              <div className="informacion">
+                <div>
+                  <BalanceIcon /> {pokemon.weight} <br />
+                  Weight
+                </div>
+                <div className="peso">
+                  <StraightenIcon /> {pokemon.height} <br />
+                  Height
+                </div>
+                <div className="moves">
+                  {pokemon.move2 !== "" ? (
+                    <>
+                      <span className={pokemon.move}>{pokemon.move}</span>
+                      <span className={pokemon.move2}>{pokemon.move2}</span>
+                    </>
+                  ) : (
+                    <span className={pokemon.move}>{pokemon.move}</span>
+                  )}
+                </div>
+              </div>
+              <br />
+              <div className="descripcion">{pokemon.description}</div>
+              <div>
+                <h3 className="baseStats" style={{ color: pokemon.color }}>
+                  Base Stats
+                </h3>
+                <div className="contiene">
+                  <ul className="lista" style={{ color: pokemon.color }}>
+                    <li className="lalista">
+                      <label className="nombres">{"HP"}</label>
+                      <label className="numeros">{pokemon.hp}</label>
+                      <div className="gus">
+                        <div
+                          className="agustina"
+                          style={{
+                            backgroundColor: pokemon.color,
+                            width: `${pokemon.hp / 2}%`,
+                          }}
+                        ></div>
 
-                    <div style={{ flex: "1" }}></div>
-                  </div>
-                </li>
-                <li className="lalista">
-                  <label className="nombres">{"DEF"}</label>
-                  <label className="numeros">{pokemon.def}</label>
-                  <div className="gus">
-                    <div
-                      className="agustina"
-                      style={{
-                        backgroundColor: pokemon.color,
-                        width: `${pokemon.def / 2}%`,
-                      }}
-                    ></div>
+                        <div style={{ flex: "1" }}></div>
+                      </div>
+                    </li>
+                    <li className="lalista">
+                      <label className="nombres">{"ATK"}</label>
+                      <label className="numeros">{pokemon.atk}</label>
+                      <div className="gus">
+                        <div
+                          className="agustina"
+                          style={{
+                            backgroundColor: pokemon.color,
+                            width: `${pokemon.atk / 2}%`,
+                          }}
+                        ></div>
 
-                    <div style={{ flex: "1" }}></div>
-                  </div>
-                </li>
-                <li className="lalista">
-                  <label className="nombres">{"SATK"}</label>
-                  <label className="numeros">{pokemon.satk}</label>
-                  <div className="gus">
-                    <div
-                      className="agustina"
-                      style={{
-                        backgroundColor: pokemon.color,
-                        width: `${pokemon.satk / 2}%`,
-                      }}
-                    ></div>
+                        <div style={{ flex: "1" }}></div>
+                      </div>
+                    </li>
+                    <li className="lalista">
+                      <label className="nombres">{"DEF"}</label>
+                      <label className="numeros">{pokemon.def}</label>
+                      <div className="gus">
+                        <div
+                          className="agustina"
+                          style={{
+                            backgroundColor: pokemon.color,
+                            width: `${pokemon.def / 2}%`,
+                          }}
+                        ></div>
 
-                    <div style={{ flex: "1" }}></div>
-                  </div>
-                </li>
-                <li className="lalista">
-                  <label className="nombres">{"SDEF"}</label>
-                  <label className="numeros">{pokemon.sdef}</label>
-                  <div className="gus">
-                    <div
-                      className="agustina"
-                      style={{
-                        backgroundColor: pokemon.color,
-                        width: `${pokemon.sdef / 2}%`,
-                      }}
-                    ></div>
+                        <div style={{ flex: "1" }}></div>
+                      </div>
+                    </li>
+                    <li className="lalista">
+                      <label className="nombres">{"SATK"}</label>
+                      <label className="numeros">{pokemon.satk}</label>
+                      <div className="gus">
+                        <div
+                          className="agustina"
+                          style={{
+                            backgroundColor: pokemon.color,
+                            width: `${pokemon.satk / 2}%`,
+                          }}
+                        ></div>
 
-                    <div style={{ flex: "1" }}></div>
-                  </div>
-                </li>
-                <li className="lalista">
-                  <label className="nombres">{"SPD"}</label>
-                  <label className="numeros">{pokemon.sdef}</label>
-                  <div className="gus">
-                    <div
-                      className="agustina"
-                      style={{
-                        backgroundColor: pokemon.color,
-                        width: `${pokemon.sdef / 2}%`,
-                      }}
-                    ></div>
+                        <div style={{ flex: "1" }}></div>
+                      </div>
+                    </li>
+                    <li className="lalista">
+                      <label className="nombres">{"SDEF"}</label>
+                      <label className="numeros">{pokemon.sdef}</label>
+                      <div className="gus">
+                        <div
+                          className="agustina"
+                          style={{
+                            backgroundColor: pokemon.color,
+                            width: `${pokemon.sdef / 2}%`,
+                          }}
+                        ></div>
 
-                    <div style={{ flex: "1" }}></div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </main>
+                        <div style={{ flex: "1" }}></div>
+                      </div>
+                    </li>
+                    <li className="lalista">
+                      <label className="nombres">{"SPD"}</label>
+                      <label className="numeros">{pokemon.sdef}</label>
+                      <div className="gus">
+                        <div
+                          className="agustina"
+                          style={{
+                            backgroundColor: pokemon.color,
+                            width: `${pokemon.sdef / 2}%`,
+                          }}
+                        ></div>
+
+                        <div style={{ flex: "1" }}></div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </main>
+          </>
+        )}
       </div>
     )
   );

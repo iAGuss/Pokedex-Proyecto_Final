@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import "./CartaP.css";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { SpinnerDotted } from "spinners-react";
+
 function Pokemon({ pokemon }) {
   // const reload = () => {
   //   window.location.reload(true);

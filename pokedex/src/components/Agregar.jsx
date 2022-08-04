@@ -3,11 +3,14 @@ import arrowleft from "../assets/arrow-left.svg";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { SpinnerDotted } from "spinners-react";
+
 export default function Agregar() {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm();
   // const [number, setNumber] = useState("");
@@ -113,185 +116,219 @@ export default function Agregar() {
       console.log("No se pudo conectar con el back end");
     }
   };
+
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
   return (
     <div className="agregar_contenedor">
-      <div className="titulo-agregar">
-        <Link to="/">
-          <img className="flechita" src={arrowleft} />
-        </Link>
-        <h1>Crea tu propio pokemon</h1>
-      </div>
-      <div className="creando-pokemon">
-        <form onSubmit={handleSubmit(registrarPokemon)}>
-          <div className="nombre-pokemon">
-            <label htmlFor="name">Nombre </label>
-            <div>
-              <input type="text" {...register("name", { required: true })} />
-              {errors.name && <span>Error este campo es requerido</span>}
-            </div>
-            <label htmlFor="number">Numero </label>
-            <div>
-              <input type="text" {...register("number", { required: true })} />
-              {errors.number && <span>Error este campo es requerido</span>}
-            </div>
+      {loading ? (
+        <SpinnerDotted color={"#ecbc3e"} loading={loading} size={150} />
+      ) : (
+        <>
+          <div className="titulo-agregar">
+            <Link to="/">
+              <img className="flechita" src={arrowleft} />
+            </Link>
+            <h1>Crea tu propio pokemon</h1>
           </div>
-          <div className="imagen-pokemon">
-            <label htmlFor="name">
-              Carga la imagen del pokemon mediante url
-            </label>
-            <input type="text" {...register("imagen", { required: true })} />
-            {errors.imagen && <span>Error este campo es requerido</span>}
-          </div>
-          <div className="peso-tamaño">
-            <label htmlFor="height">Altura</label>
-            <input
-              className="pesoTamaño"
-              type="number"
-              name=""
-              id=""
-              min="1"
-              max="200"
-              {...register("height", { required: true })}
-            />
-            {errors.height && <span>Error este campo es requerido</span>}
-            <label htmlFor="weight">Peso</label>
-            <input
-              className="pesoTamaño"
-              type="number"
-              name=""
-              id=""
-              min="1"
-              max="200"
-              {...register("weight", { required: true })}
-            />
-            {errors.weight && <span>Error este campo es requerido</span>}
-          </div>
-          <h1>Stats del pokemon</h1>
-          <div className="stats-pokemon">
-            <div>
-              <label htmlFor="HP">HP</label>
-              <input
-                className="statPokemon"
-                type="number"
-                name=""
-                id=""
-                min="1"
-                max="200"
-                {...register("hp", { required: true })}
-              />
-              {errors.hp && <span>campo necesario</span>}
-            </div>
-            <div>
-              <label htmlFor="ATK">ATK</label>
-              <input
-                className="statPokemon"
-                type="number"
-                name=""
-                id=""
-                min="1"
-                max="100"
-                {...register("atk", { required: true })}
-              />
-              {errors.atk && <span>campo necesario</span>}
-            </div>
-            <div>
-              <label htmlFor="DEF">DEF</label>
-              <input
-                className="statPokemon"
-                type="number"
-                name=""
-                id=""
-                min="1"
-                max="200"
-                {...register("def", { required: true })}
-              />
-              {errors.def && <span>campo necesario</span>}
-            </div>
-            <div>
-              <label htmlFor="SPE">SPD</label>
-              <input
-                className="statPokemon"
-                type="number"
-                name=""
-                id=""
-                min="1"
-                max="200"
-                {...register("spd", { required: true })}
-              />
-              {errors.spd && <span>campo necesario</span>}
-            </div>
-            <div>
-              <label htmlFor="SATK">SATK</label>
-              <input
-                className="statPokemon"
-                type="number"
-                name=""
-                id=""
-                min="1"
-                max="200"
-                {...register("satk", { required: true })}
-              />
-              {errors.satk && <span>campo necesario</span>}
-            </div>
-            <div>
-              <label htmlFor="statPokemon">SDEF</label>
-              <input
-                className="statPokemon"
-                type="number"
-                name=""
-                id=""
-                min="1"
-                max="200"
-                {...register("sdef", { required: true })}
-              />
-              {errors.sdef && <span>campo necesario</span>}
-            </div>
-          </div>
-          <div className="movimiento-pokemon">
-            <label htmlFor="moves">Nombre del primer movimiento</label>
-            <div>
-              <input type="text" {...register("move1", { required: true })} />
-              {errors.move1 && <span>Error este campo es requerido</span>}
-            </div>
-            <label htmlFor="moves">Nombre del segundo movimiento</label>
-            <input type="text" {...register("move2")} />
-          </div>
-          <div className="movimiento-pokemon">
-            <label htmlFor="types">Tipo principal</label>
-            <div>
-              <input type="text" {...register("type1", { required: true })} />
-              {errors.type1 && <span>Error este campo es requerido</span>}
-            </div>
-            <label htmlFor="types">Tipo secundario</label>
-            <input type="text" {...register("type2")} />
-          </div>
-          <div className="colores-pokemon">
-            <label htmlFor="color-pokemon">Color primario</label>
-            <input
-              type="text"
-              {...register("typecolor1", { required: true })}
-            />
-            {errors.typecolor1 && <span>Error este campo es requerido</span>}
-            <label htmlFor="color2-pokemon">Color secundario</label>
-            <input type="text" {...register("typecolor2")} />
-          </div>
-          <div className="descripcion-pokemon">
-            <label htmlFor="description">Descripcion</label>
-            <textarea
-              name=""
-              id=""
-              cols="80"
-              rows="7"
-              {...register("description", { required: true })}
-            ></textarea>
-            {errors.description && <span>Error este campo es requerido</span>}
-          </div>
+          <div className="creando-pokemon">
+            <form onSubmit={handleSubmit(registrarPokemon)}>
+              <div className="nombre-pokemon">
+                <label htmlFor="name">Nombre </label>
+                <div>
+                  <input
+                    type="text"
+                    {...register("name", { required: true })}
+                  />
+                  {errors.name && <span>Error este campo es requerido</span>}
+                </div>
+                <label htmlFor="number">Numero </label>
+                <div>
+                  <input
+                    type="text"
+                    {...register("number", { required: true })}
+                  />
+                  {errors.number && <span>Error este campo es requerido</span>}
+                </div>
+              </div>
+              <div className="imagen-pokemon">
+                <label htmlFor="name">
+                  Carga la imagen del pokemon mediante url
+                </label>
+                <input
+                  type="text"
+                  {...register("imagen", { required: true })}
+                />
+                {errors.imagen && <span>Error este campo es requerido</span>}
+              </div>
+              <div className="peso-tamaño">
+                <label htmlFor="height">Altura</label>
+                <input
+                  className="pesoTamaño"
+                  type="number"
+                  name=""
+                  id=""
+                  min="1"
+                  max="200"
+                  {...register("height", { required: true })}
+                />
+                {errors.height && <span>Error este campo es requerido</span>}
+                <label htmlFor="weight">Peso</label>
+                <input
+                  className="pesoTamaño"
+                  type="number"
+                  name=""
+                  id=""
+                  min="1"
+                  max="200"
+                  {...register("weight", { required: true })}
+                />
+                {errors.weight && <span>Error este campo es requerido</span>}
+              </div>
+              <h1>Stats del pokemon</h1>
+              <div className="stats-pokemon">
+                <div>
+                  <label htmlFor="HP">HP</label>
+                  <input
+                    className="statPokemon"
+                    type="number"
+                    name=""
+                    id=""
+                    min="1"
+                    max="200"
+                    {...register("hp", { required: true })}
+                  />
+                  {errors.hp && <span>campo necesario</span>}
+                </div>
+                <div>
+                  <label htmlFor="ATK">ATK</label>
+                  <input
+                    className="statPokemon"
+                    type="number"
+                    name=""
+                    id=""
+                    min="1"
+                    max="100"
+                    {...register("atk", { required: true })}
+                  />
+                  {errors.atk && <span>campo necesario</span>}
+                </div>
+                <div>
+                  <label htmlFor="DEF">DEF</label>
+                  <input
+                    className="statPokemon"
+                    type="number"
+                    name=""
+                    id=""
+                    min="1"
+                    max="200"
+                    {...register("def", { required: true })}
+                  />
+                  {errors.def && <span>campo necesario</span>}
+                </div>
+                <div>
+                  <label htmlFor="SPE">SPD</label>
+                  <input
+                    className="statPokemon"
+                    type="number"
+                    name=""
+                    id=""
+                    min="1"
+                    max="200"
+                    {...register("spd", { required: true })}
+                  />
+                  {errors.spd && <span>campo necesario</span>}
+                </div>
+                <div>
+                  <label htmlFor="SATK">SATK</label>
+                  <input
+                    className="statPokemon"
+                    type="number"
+                    name=""
+                    id=""
+                    min="1"
+                    max="200"
+                    {...register("satk", { required: true })}
+                  />
+                  {errors.satk && <span>campo necesario</span>}
+                </div>
+                <div>
+                  <label htmlFor="statPokemon">SDEF</label>
+                  <input
+                    className="statPokemon"
+                    type="number"
+                    name=""
+                    id=""
+                    min="1"
+                    max="200"
+                    {...register("sdef", { required: true })}
+                  />
+                  {errors.sdef && <span>campo necesario</span>}
+                </div>
+              </div>
+              <div className="movimiento-pokemon">
+                <label htmlFor="moves">Nombre del primer movimiento</label>
+                <div>
+                  <input
+                    type="text"
+                    {...register("move1", { required: true })}
+                  />
+                  {errors.move1 && <span>Error este campo es requerido</span>}
+                </div>
+                <label htmlFor="moves">Nombre del segundo movimiento</label>
+                <input type="text" {...register("move2")} />
+              </div>
+              <div className="movimiento-pokemon">
+                <label htmlFor="types">Tipo principal</label>
+                <div>
+                  <input
+                    type="text"
+                    {...register("type1", { required: true })}
+                  />
+                  {errors.type1 && <span>Error este campo es requerido</span>}
+                </div>
+                <label htmlFor="types">Tipo secundario</label>
+                <input type="text" {...register("type2")} />
+              </div>
+              <div className="colores-pokemon">
+                <label htmlFor="color-pokemon">Color primario</label>
+                <input
+                  type="text"
+                  {...register("typecolor1", { required: true })}
+                />
+                {errors.typecolor1 && (
+                  <span>Error este campo es requerido</span>
+                )}
+                <label htmlFor="color2-pokemon">Color secundario</label>
+                <input type="text" {...register("typecolor2")} />
+              </div>
+              <div className="descripcion-pokemon">
+                <label htmlFor="description">Descripcion</label>
+                <textarea
+                  name=""
+                  id=""
+                  cols="80"
+                  rows="7"
+                  {...register("description", { required: true })}
+                ></textarea>
+                {errors.description && (
+                  <span>Error este campo es requerido</span>
+                )}
+              </div>
 
-          <button type="submit" className="crear">
-            Crear
-          </button>
-        </form>
-      </div>
+              <button type="submit" className="crear">
+                Crear
+              </button>
+            </form>
+          </div>
+        </>
+      )}
     </div>
   );
 }
