@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { SpinnerDotted } from "spinners-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Agregar() {
   const {
@@ -13,6 +14,7 @@ export default function Agregar() {
 
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
   // const [number, setNumber] = useState("");
   // const [name, setName] = useState("");
   // const [weight, setWeight] = useState("");
@@ -100,7 +102,7 @@ export default function Agregar() {
     try {
       const respuesta = await fetch("http://localhost:3010/pokemon", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, color: data.typecolor1 }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -109,7 +111,7 @@ export default function Agregar() {
       if (!respuesta.ok) {
         throw new Error("Error en el servidor");
       }
-      //navigate
+      navigate(-1);
 
       console.log("hola");
     } catch (error) {

@@ -44,7 +44,7 @@ function Login() {
       localStorage.setItem("token", userFetch.token);
 
       localStorage.token = userFetch.token;
-      navigate(-1);
+      navigate("/login");
     } catch (error) {
       console.log("No se pudo conectar con el back end");
     }

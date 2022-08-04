@@ -16,7 +16,7 @@ function Pokemon({ pokemon }) {
         {
           method: "DELETE",
           headers: {
-            "Content-Type": "application/json",
+            "auth-token": localStorage.token,
           },
         }
       );
@@ -42,13 +42,17 @@ function Pokemon({ pokemon }) {
           <span style={{ color: pokemon.color }} className="number">
             {pokemon.number}
           </span>
-          <span
-            className="borrar-x"
-            onClick={elclick}
-            style={{ color: pokemon.color }}
-          >
-            x
-          </span>
+          {localStorage.token ? (
+            <span
+              className="borrar-x"
+              onClick={elclick}
+              style={{ color: pokemon.color }}
+            >
+              x
+            </span>
+          ) : (
+            <></>
+          )}
           <img className="imagen" src={pokemon.imagen} alt="" />
           <h1 className="nombre">{pokemon.name} </h1>
         </div>
