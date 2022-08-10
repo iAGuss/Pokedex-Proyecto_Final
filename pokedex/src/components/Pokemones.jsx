@@ -5,7 +5,7 @@ import pokeball from "../assets/Pokeball.png";
 import arrow from "../assets/Arrow.svg";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import agregar from "../assets/pickachumeme.jpg";
+import agregar from "../assets/add.png";
 import { SpinnerDotted } from "spinners-react";
 
 function Pokemones() {

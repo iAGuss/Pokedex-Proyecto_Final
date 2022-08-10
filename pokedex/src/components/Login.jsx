@@ -9,7 +9,7 @@ function Login() {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm();
   // const [mail, setEmail] = useState("");
@@ -44,7 +44,7 @@ function Login() {
       localStorage.setItem("token", userFetch.token);
 
       localStorage.token = userFetch.token;
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.log("No se pudo conectar con el back end");
     }
