@@ -84,13 +84,11 @@ function Login() {
                 {errors.password && <span>Error este campo es requerido</span>}
               </div>
 
-              <button className="button login__submit">
-                <span className="button__text">Login</span>
-              </button>
+              <button className="buttonlogin__submit">Login</button>
             </form>
             <div className="social-login">
               <Link to="/">
-                <button>Regresar</button>
+                <button className="regresar">Regresar</button>
               </Link>
             </div>
           </div>

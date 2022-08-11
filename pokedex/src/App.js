@@ -7,22 +7,25 @@ import Infocontenedor from "./components/Infocontenedor.jsx";
 import Login from "./components/Login";
 import Register from "./components/Registrar";
 import Agregar from "./components/Agregar";
+import background from "./assets/Pokemon_all.jpg";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Pokemones />} />
-          <Route
-            path="contenedor/:nombrePokemon"
-            element={<Infocontenedor />}
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registrar" element={<Register />} />
-          <Route path="/agregar" element={<Agregar />} />
-        </Routes>
-      </BrowserRouter>
+      <div className="appcentrar">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Pokemones />} />
+            <Route
+              path="contenedor/:nombrePokemon"
+              element={<Infocontenedor />}
+            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/registrar" element={<Register />} />
+            <Route path="/agregar" element={<Agregar />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }

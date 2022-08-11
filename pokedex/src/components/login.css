@@ -53,6 +53,25 @@
   right: 120px;
   border-radius: 0 72px 0 0;
 }
+.buttonlogin__submit {
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 20px;
+  border: 2px solid #ffd819;
+  background: #f9cf30;
+}
+.buttonlogin__submit:hover {
+  background: #fff;
+  color: #ffd819;
+}
 
 .screen__background__shape2 {
   height: 220px;

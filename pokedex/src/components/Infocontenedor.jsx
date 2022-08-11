@@ -95,13 +95,19 @@ function Infocontenedor() {
                 {pokemon.type2 !== "" ? (
                   <>
                     <span
-                      style={{ backgroundColor: pokemon.typecolor1 }}
+                      style={{
+                        backgroundColor: pokemon.typecolor1,
+                        borderRadius: "10px",
+                      }}
                       className={pokemon.type}
                     >
                       {pokemon.type}
                     </span>
                     <span
-                      style={{ backgroundColor: pokemon.typecolor2 }}
+                      style={{
+                        backgroundColor: pokemon.typecolor2,
+                        borderRadius: "10px",
+                      }}
                       className={pokemon.type2}
                     >
                       {pokemon.type2}
@@ -109,7 +115,10 @@ function Infocontenedor() {
                   </>
                 ) : (
                   <span
-                    style={{ backgroundColor: pokemon.typecolor1 }}
+                    style={{
+                      backgroundColor: pokemon.typecolor1,
+                      borderRadius: "10px",
+                    }}
                     className={pokemon.type}
                   >
                     {pokemon.type}

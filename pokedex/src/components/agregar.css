@@ -1,3 +1,6 @@
+.agregar_contenedor {
+  width: 80%;
+}
 .peso-tamaño {
   display: flex;
   width: 100%;

@@ -5,7 +5,7 @@ import pokeball from "../assets/Pokeball.png";
 import arrow from "../assets/Arrow.svg";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import agregar from "../assets/add.png";
+import agregar from "../assets/add (1).png";
 import { SpinnerDotted } from "spinners-react";
 
 function Pokemones() {
@@ -72,35 +72,24 @@ function Pokemones() {
   }, []);
   return (
     <>
-      {loading ? (
-        <SpinnerDotted
-          className="elspiner"
-          color={"#FF4500"}
-          top={400}
-          loading={loading}
-          size={150}
-          marginTop={40}
-        />
-      ) : (
-        <>
-          <header className="headerr">
-            <div className="header">
-              <div className="title">
-                <img src={pokeball} alt="logo-pokeball" className="pokeball" />
-                <h1>Pokédex</h1>
-                {localStorage.token ? (
-                  <button onClick={setLocalStorage}>Salir</button>
-                ) : (
-                  <>
-                    <Link to="/registrar">
-                      <button className="register-boton">Register</button>
-                    </Link>
-                    <Link to="/login">
-                      <button className="login-boton">Login</button>
-                    </Link>
-                  </>
-                )}
-                {/* <Link to="/login">
+      <header className="headerr">
+        <div className="header">
+          <div className="title">
+            <img src={pokeball} alt="logo-pokeball" className="pokeball" />
+            <h1>Pokédex</h1>
+            {localStorage.token ? (
+              <button onClick={setLocalStorage}>Salir</button>
+            ) : (
+              <>
+                <Link to="/registrar">
+                  <button className="register-boton">Register</button>
+                </Link>
+                <Link to="/login">
+                  <button className="login-boton">Login</button>
+                </Link>
+              </>
+            )}
+            {/* <Link to="/login">
               <button className="login-boton">Login</button>
             </Link>
             <Link to="/registrar">
@@ -109,31 +98,42 @@ function Pokemones() {
             <Link to="/">
               <button className="register-boton">Salir</button>
             </Link> */}
-              </div>
+          </div>
 
-              <div className="title2">
-                <span className="az">
-                  <span>{ordenarPorNumero ? "A-Z" : "#"}</span>
-                </span>
-                <img
-                  onClick={funcionDeOrdenado}
-                  src={arrow}
-                  alt="flecha"
-                  className="flecha"
-                />
-              </div>
-            </div>
-            <div className="delInput">
-              <input
-                onChange={filtrado}
-                type="text"
-                name=""
-                id="jeje"
-                placeholder="Buscar"
-              />
-            </div>
-          </header>
-          <main>
+          <div className="title2">
+            <span className="az">
+              <span>{ordenarPorNumero ? "A-Z" : "#"}</span>
+            </span>
+            <img
+              onClick={funcionDeOrdenado}
+              src={arrow}
+              alt="flecha"
+              className="flecha"
+            />
+          </div>
+        </div>
+        <div className="delInput">
+          <input
+            onChange={filtrado}
+            type="text"
+            name=""
+            id="jeje"
+            placeholder="Buscar"
+          />
+        </div>
+      </header>
+      <main>
+        {loading ? (
+          <SpinnerDotted
+            className="elspiner"
+            color={"#FF4500"}
+            top={400}
+            loading={loading}
+            size={150}
+            marginTop={40}
+          />
+        ) : (
+          <>
             {localStorage.token ? (
               <div className="contenedor_nuevo">
                 <Link to="/agregar">
@@ -162,9 +162,9 @@ function Pokemones() {
                 ))}
               </div>
             ) : null}
-          </main>
-        </>
-      )}
+          </>
+        )}
+      </main>
     </>
   );
 }
