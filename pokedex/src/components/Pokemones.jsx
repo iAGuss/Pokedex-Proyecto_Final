@@ -57,6 +57,11 @@ function Pokemones() {
   };
   const funcionDeOrdenado = !ordenarPorNumero ? alfabeticamente : numericamente;
 
+  // const pagina = () => {
+  //   const lista = [...pokemonsFiltrados].slice(0, 5);
+  //   setpokemonsFiltrados(lista);
+
+  // };
   //-------------------reinicio token------------------------------------------
   const setLocalStorage = () => {
     localStorage.removeItem("token");
@@ -78,7 +83,9 @@ function Pokemones() {
             <img src={pokeball} alt="logo-pokeball" className="pokeball" />
             <h1>Pokédex</h1>
             {localStorage.token ? (
-              <button onClick={setLocalStorage}>Salir</button>
+              <button className="salir" onClick={setLocalStorage}>
+                Deslogear
+              </button>
             ) : (
               <>
                 <Link to="/registrar">

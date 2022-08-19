@@ -1,6 +1,11 @@
 .App {
   display: flex;
+  background-image: url("./assets/thumb-1920-998181.jpg");
 
+  background-position: right bottom, left top, left;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
   flex-direction: column;
   width: 100%;
   background-color: #74afb68c;
@@ -11,7 +16,7 @@
   font-family: url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,500;1,400;1,500&family=Kdam+Thmor+Pro&family=Poppins:wght@100&display=swap");
 }
 .appcentrar {
-  width: 52%;
+  /* width: 52%; */
   display: flex;
   flex-direction: column;
   align-items: center;

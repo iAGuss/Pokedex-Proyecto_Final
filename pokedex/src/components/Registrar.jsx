@@ -81,7 +81,7 @@ export default function Register() {
                 />
               </div>
               <button className="button login__submit">
-                <span className="button__text">Login</span>
+                <span className="button__text">Registro</span>
               </button>
             </form>
             <div className="social-login">
