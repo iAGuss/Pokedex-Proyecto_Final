@@ -7,7 +7,7 @@ import Infocontenedor from "./components/Infocontenedor.jsx";
 import Login from "./components/Login";
 import Register from "./components/Registrar";
 import Agregar from "./components/Agregar";
-import background from "./assets/Pokemon_all.jpg";
+
 
 function App() {
   return (

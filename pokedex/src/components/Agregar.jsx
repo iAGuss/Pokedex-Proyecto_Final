@@ -120,6 +120,7 @@ export default function Agregar() {
   };
 
   const [loading, setLoading] = useState(false);
+  
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {

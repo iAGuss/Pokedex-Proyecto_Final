@@ -33,7 +33,7 @@ h3 {
   position: RELATIVE;
   background: white;
   display: flex;
-  width: 60%;
+  width: 600px;
   flex-direction: column;
   align-items: center;
   gap: 50px;
@@ -55,7 +55,7 @@ header {
 
 .imageni {
   position: absolute;
-  left: 160px;
+  left: 30%;
   top: 80px;
   height: 240px;
 }
@@ -64,7 +64,6 @@ header {
   border-radius: 44px;
   padding: 4px;
   margin-top: 20px;
-
 }
 .informacion {
   display: flex;

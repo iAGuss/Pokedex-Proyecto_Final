@@ -84,7 +84,7 @@ function Pokemones() {
             <h1>Pokédex</h1>
             {localStorage.token ? (
               <button className="salir" onClick={setLocalStorage}>
-                Deslogear
+                log out
               </button>
             ) : (
               <>
